@@ -13,7 +13,7 @@ public class MainMovieJDBC {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                    "root", "4423125");
+                    "root", "0000");
             stmt = conn.createStatement();
             String filePath = "/Users/cham/documents/github/searchmovie/src/movie_data.txt";
             while (true) {
