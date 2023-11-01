@@ -36,26 +36,22 @@ public class MainMovieJDBC {
                         sc.close();
                         return;
                     case 1:
-                        //DeleteMovieData.deleteData(conn);
+                        DropTable.dropMovieTable(conn);
                         CreateTable.createMovieTable(conn);
-                        InsertMovieData.insertMovieData(conn, filePath);
+                        InsertData.insertMovieData(conn, filePath);
                         stmt.close();
-                        conn.close();
                         break;
                     case 2:
-                        SearchMovie.searchByKeyword();
+                        SearchMovie.searchByKeyword(conn);
                         stmt.close();
-                        conn.close();
                         break;
                     case 3:
-                        SearchMovie.searchByTotalNum();
+                        SearchMovie.searchByTotalNum(conn);
                         stmt.close();
-                        conn.close();
                         break;
                     case 4:
-                        SearchMovie.searchByReleaseDate();
+                        SearchMovie.searchByReleaseDate(conn);
                         stmt.close();
-                        conn.close();
                         break;
                     default:
                         System.out.println("유효한 번호를 입력하세요. (0~4 입력)");

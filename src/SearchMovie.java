@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SearchMovie {
-    public static void searchByKeyword() {
-        Connection conn = null;
+
+    public static void searchByKeyword(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
@@ -15,9 +15,6 @@ public class SearchMovie {
         String keyword = sc.nextLine();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                    "root", "0000");
 
             String query = "select * from movie where title like ? order by id";
             pstmt = conn.prepareStatement(query);
@@ -37,7 +34,7 @@ public class SearchMovie {
                         rs.getInt("totalnum") + "|" +
                         rs.getString("grade") +"\n");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -47,16 +44,13 @@ public class SearchMovie {
                 if (pstmt != null) {
                     pstmt.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-    public static void searchByTotalNum() {
-        Connection conn = null;
+
+    public static void searchByTotalNum(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
@@ -64,10 +58,6 @@ public class SearchMovie {
         int keyword = sc.nextInt();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                    "root", "0000");
-
             String query = "select * from movie where totalnum > ? order by totalnum desc";
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, keyword);
@@ -86,7 +76,7 @@ public class SearchMovie {
                         rs.getInt("totalnum") + "|" +
                         rs.getString("grade")+"\n");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -96,16 +86,12 @@ public class SearchMovie {
                 if (pstmt != null) {
                     pstmt.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-    public static void searchByReleaseDate() {
-        Connection conn = null;
+    public static void searchByReleaseDate(Connection conn) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
@@ -114,11 +100,6 @@ public class SearchMovie {
         String[] values = date.split(",");
         if (values.length == 1) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                        "root", "0000");
-
                 String query = "select * from movie where releasedate = ? order by id";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setString(1, values[0]);
@@ -137,7 +118,7 @@ public class SearchMovie {
                             rs.getInt("totalnum") + "|" +
                             rs.getString("grade")+"\n");
                 }
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
                 try {
@@ -147,9 +128,6 @@ public class SearchMovie {
                     if (pstmt != null) {
                         pstmt.close();
                     }
-                    if (conn != null) {
-                        conn.close();
-                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -158,10 +136,6 @@ public class SearchMovie {
         }
      else if (values.length == 2) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                    "root", "0000");
-
             String query = "select * from movie where releasedate between ? and ? order by releasedate";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, values[0]);
@@ -181,7 +155,7 @@ public class SearchMovie {
                         rs.getInt("totalnum") + "|" +
                         rs.getString("grade")+"\n");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -190,9 +164,6 @@ public class SearchMovie {
                 }
                 if (pstmt != null) {
                     pstmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

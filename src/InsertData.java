@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertMovieData {
+public class InsertData {
     public static void insertMovieData(Connection conn, String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -25,9 +25,9 @@ public class InsertMovieData {
                     int totalNum = Integer.parseInt(data[7]);
                     String grade = data[8];
 
-                    String sql = "insert into movie (id, title, company, releasedate, country, totalscreen, profit, totalnum, grade) " +
+                    String query = "insert into movie (id, title, company, releasedate, country, totalscreen, profit, totalnum, grade) " +
                             "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                         pstmt.setInt(1, id);
                         pstmt.setString(2, title);
                         pstmt.setString(3, company);
@@ -46,6 +46,6 @@ public class InsertMovieData {
             }
         } catch (IOException e) {
             System.out.println("파일 읽기 오류: "+e.getMessage());
-        }System.out.println("---------------------데이터 추가 완료---------------------------");
+        }System.out.println("-------------------데이터 추가 작업 완료-------------------------");
     }
 }
