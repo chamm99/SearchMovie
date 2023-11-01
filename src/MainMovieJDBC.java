@@ -11,11 +11,18 @@ public class MainMovieJDBC {
         Scanner sc = new Scanner(System.in);
 
         try {
+            //1. project structure -> module에서 mysql-connector jar 파일 설정
             Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //2. database, user, password 설정
             conn = DriverManager.getConnection("jdbc:mysql://localhost/movie?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                     "root", "0000");
-            stmt = conn.createStatement();
+
+            //3. 읽어올 텍스트 파일의 경로 설정
             String filePath = "/Users/cham/documents/github/searchmovie/src/movie_data.txt";
+
+            stmt = conn.createStatement();
+
             while (true) {
                 System.out.print(
                         "+==========================================================+\n" +
