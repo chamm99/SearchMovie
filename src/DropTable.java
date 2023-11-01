@@ -6,7 +6,7 @@ public class DropTable {
         try (PreparedStatement stmt = conn.prepareStatement(dropMovie)) {
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("테이블 제거 실패: "+e.getMessage());
+            System.out.println("테이블 제거 오류: "+e.getMessage());
         }
     }
 }
