@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DropTable {
     public static void dropMovieTable(Connection conn) {
-        String dropMovie = "drop table movie";
+        String dropMovie = "drop table if exists movie";
         try (PreparedStatement stmt = conn.prepareStatement(dropMovie)) {
             stmt.executeUpdate();
         } catch (SQLException e) {

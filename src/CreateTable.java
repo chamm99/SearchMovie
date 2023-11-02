@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class CreateTable {
     public static void createMovieTable(Connection conn) {
-        String createTable = "create table movie (" +
+        String createTable = "create table if not exists movie (" +
                 "id int," +
                 "title varchar(100)," +
                 "company varchar(50)," +
